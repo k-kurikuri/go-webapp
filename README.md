@@ -1,11 +1,15 @@
 # Welcome to GoLang Web Application by Revel
 
-This is sample Revel web framework application.
+This is an application to record what you last did.  
 It implements the basic CRUD function.
 
-## Function Used
+[Saigo Ha Itu?](http://sarunw.com/lasttime) I was inspired by the application
 
-* Route
-* Controller
-* ORM
+## Develop Environment
+* GoLang
+* Revel
+* MYSQL
 * etc...
+
+## Licence
+MIT Licence
