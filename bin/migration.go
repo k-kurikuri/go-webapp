@@ -6,7 +6,7 @@ import (
 	"github.com/k-kurikuri/gogo-done/app/models"
 )
 
-func main () {
+func main() {
 	db, _ := gorm.Open("mysql", "root:root@/done_list?charset=utf8&parseTime=True&loc=Local")
 
 	defer db.Close()
@@ -15,5 +15,6 @@ func main () {
 		&models.DoneList{},
 		&models.Category{},
 		&models.DoneListCategory{},
+		&models.User{},
 	)
 }
