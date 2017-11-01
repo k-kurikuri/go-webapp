@@ -1,9 +1,9 @@
 package main
 
 import (
-	"github.com/k-kurikuri/last-didit-go/app/models"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"github.com/k-kurikuri/gogo-done/app/models"
 )
 
 func main () {
@@ -11,5 +11,9 @@ func main () {
 
 	defer db.Close()
 	// Add table suffix when create tables
-	db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(&models.DoneList{})
+	db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(
+		&models.DoneList{},
+		&models.Category{},
+		&models.DoneListCategory{},
+	)
 }
