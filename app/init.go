@@ -1,7 +1,12 @@
 package app
 
 import (
+	_ "github.com/go-sql-driver/mysql"
+	"github.com/jinzhu/gorm"
+	_ "github.com/jinzhu/gorm/dialects/mysql"
+	"github.com/joho/godotenv"
 	"github.com/revel/revel"
+	"os"
 )
 
 var (
@@ -10,6 +15,8 @@ var (
 
 	// BuildTime revel app build-time (ldflags)
 	BuildTime string
+
+	Db *gorm.DB
 )
 
 func init() {
@@ -29,13 +36,28 @@ func init() {
 		revel.ActionInvoker,           // Invoke the action.
 	}
 
-
 	// register startup functions with OnAppStart
 	// revel.DevMode and revel.RunMode only work inside of OnAppStart. See Example Startup Script
 	// ( order dependent )
 	// revel.OnAppStart(ExampleStartupScript)
-	// revel.OnAppStart(InitDB)
+	revel.OnAppStart(InitDB)
 	// revel.OnAppStart(FillCache)
+
+	err := godotenv.Load()
+	if err != nil {
+		panic("Error loading .env file")
+	}
+}
+
+func InitDB() {
+	user := os.Getenv("DB_USER")
+	pass := os.Getenv("DB_PASSWORD")
+	dbName := os.Getenv("DB_NAME")
+	dbOption := "?charset=utf8&parseTime=True&loc=Local"
+
+	Db, _ := gorm.Open("mysql", user+":"+pass+"@/"+dbName+dbOption)
+
+	defer Db.Close()
 }
 
 // HeaderFilter adds common security headers
