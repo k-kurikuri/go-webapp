@@ -4,9 +4,8 @@ import (
 	_ "github.com/go-sql-driver/mysql"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/mysql"
-	"github.com/joho/godotenv"
+	"github.com/k-kurikuri/gogo-done/app/db"
 	"github.com/revel/revel"
-	"os"
 )
 
 var (
@@ -42,20 +41,10 @@ func init() {
 	// revel.OnAppStart(ExampleStartupScript)
 	revel.OnAppStart(InitDB)
 	// revel.OnAppStart(FillCache)
-
-	err := godotenv.Load()
-	if err != nil {
-		panic("Error loading .env file")
-	}
 }
 
 func InitDB() {
-	user := os.Getenv("DB_USER")
-	pass := os.Getenv("DB_PASSWORD")
-	dbName := os.Getenv("DB_NAME")
-	dbOption := "?charset=utf8&parseTime=True&loc=Local"
-
-	Db, _ := gorm.Open("mysql", user+":"+pass+"@/"+dbName+dbOption)
+	Db := db.Connection()
 
 	defer Db.Close()
 }
