@@ -40,3 +40,9 @@
 [[constraint]]
   name = "github.com/revel/revel"
   version = "0.18.0"
+[[override]]
+  branch = "master"
+  name = "github.com/xeonx/timeago"
+[[override]]
+  branch = "master"
+  name = "github.com/revel/log15"
