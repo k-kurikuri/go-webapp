@@ -9,6 +9,7 @@ module:testrunner
 
 GET     /                                       App.Index
 GET     /done-list                              DoneListController.Index
+POST    /auth                                   AuthController.Authenticate
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
