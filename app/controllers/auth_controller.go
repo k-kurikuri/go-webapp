@@ -1,7 +1,6 @@
 package controllers
 
 import (
-	"github.com/k-kurikuri/gogo-done/app/auth"
 	"github.com/k-kurikuri/gogo-done/app/db"
 	"github.com/k-kurikuri/gogo-done/app/models"
 	"github.com/revel/revel"
@@ -23,13 +22,10 @@ func (c AuthController) Authenticate() revel.Result {
 		panic("non exist user")
 	}
 
-	hashPassword, err := auth.Crypt(password)
-	if err != nil {
-		panic("fail password crypt")
-	}
+	hashPassword := user.HashPass
 
 	// TODO: hashとパスワードの判定がおかしい
-	err = bcrypt.CompareHashAndPassword([]byte(hashPassword), []byte(password))
+	err := bcrypt.CompareHashAndPassword([]byte(hashPassword), []byte(password))
 	if err != nil {
 		panic("password wrong")
 	}
