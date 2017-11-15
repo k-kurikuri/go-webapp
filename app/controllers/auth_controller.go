@@ -24,7 +24,6 @@ func (c AuthController) Authenticate() revel.Result {
 
 	hashPassword := user.HashPass
 
-	// TODO: hashとパスワードの判定がおかしい
 	err := bcrypt.CompareHashAndPassword([]byte(hashPassword), []byte(password))
 	if err != nil {
 		panic("password wrong")
