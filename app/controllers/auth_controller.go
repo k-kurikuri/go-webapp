@@ -1,8 +1,10 @@
 package controllers
 
 import (
+	"encoding/json"
 	"github.com/k-kurikuri/gogo-done/app/db"
 	"github.com/k-kurikuri/gogo-done/app/models"
+	"github.com/k-kurikuri/gogo-done/app/routes"
 	"github.com/revel/revel"
 	"golang.org/x/crypto/bcrypt"
 )
@@ -29,9 +31,13 @@ func (c AuthController) Authenticate() revel.Result {
 		panic("password wrong")
 	}
 
-	// this is sample json
-	response := make(map[string]interface{})
-	response["success"] = true
-	response["user"] = user
-	return c.RenderJSON(response)
+	jsonBytes, err := json.Marshal(user)
+	if err != nil {
+		panic("json marshal error")
+	}
+
+	c.Session["user"] = string(jsonBytes)
+	c.Flash.Success("Welcome " + user.Name)
+
+	return c.Redirect(routes.DoneListController.Index())
 }
