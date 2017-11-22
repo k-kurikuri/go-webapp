@@ -7,9 +7,9 @@ module:testrunner
 # module:jobs
 
 
-GET     /                                       App.Index
-GET     /done-list                              DoneListController.Index
-POST    /auth                                   AuthController.Authenticate
+GET     /                                       Auth.Index
+GET     /done-list                              App.Index
+POST    /auth                                   Auth.Authenticate
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

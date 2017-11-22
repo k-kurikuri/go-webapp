@@ -9,11 +9,16 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-type AuthController struct {
+type Auth struct {
 	*revel.Controller
 }
 
-func (c AuthController) Authenticate() revel.Result {
+func (c Auth) Index() revel.Result {
+	greeting := "Aloha World"
+	return c.Render(greeting)
+}
+
+func (c Auth) Authenticate() revel.Result {
 	email := c.Params.Form.Get("email")
 	password := c.Params.Form.Get("password")
 
@@ -39,5 +44,5 @@ func (c AuthController) Authenticate() revel.Result {
 	c.Session["user"] = string(jsonBytes)
 	c.Flash.Success("Welcome " + user.Name)
 
-	return c.Redirect(routes.DoneListController.Index())
+	return c.Redirect(routes.App.Index())
 }
