@@ -9,7 +9,7 @@ type User struct {
 }
 
 func (c User) Create() revel.Result {
-	return c.RenderHTML("Create")
+	return c.Render()
 }
 
 func (c User) Register() revel.Result {
