@@ -1,6 +1,9 @@
 package controllers
 
 import (
+	"github.com/k-kurikuri/gogo-done/app/auth"
+	"github.com/k-kurikuri/gogo-done/app/db"
+	"github.com/k-kurikuri/gogo-done/app/models"
 	"github.com/revel/revel"
 )
 
@@ -20,10 +23,34 @@ func (c User) Register() revel.Result {
 	c.validate(email, password, name)
 
 	if c.Validation.HasErrors() {
+		// TODO: validation logic
 		c.Validation.Keep()
 		c.FlashParams()
 		return c.Redirect(User.Create)
 	}
+
+	// email登録チェック
+	user := models.User{}
+	con := db.Connection()
+	con.Where("email = ?", email).FirstOrInit(&user)
+
+	if user.Email == email {
+		c.Flash.Error("This is a registered email address")
+		c.Validation.Keep()
+		c.FlashParams()
+		return c.Redirect(User.Create)
+	}
+
+	hashPass, err := auth.Crypt(password)
+	if err != nil {
+		c.Flash.Error("Create Hash Password Failed")
+		c.Validation.Keep()
+		c.FlashParams()
+		return c.Redirect(User.Create)
+	}
+
+	user = models.User{Email: email, HashPass: hashPass, Name: name}
+	con.Create(&user)
 
 	return c.RenderHTML("Register")
 }
