@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"encoding/json"
 	"github.com/k-kurikuri/gogo-done/app/auth"
 	"github.com/k-kurikuri/gogo-done/app/db"
 	"github.com/k-kurikuri/gogo-done/app/models"
@@ -43,7 +44,13 @@ func (c User) Register() revel.Result {
 	user = models.User{Email: email, HashPass: hashPass, Name: name}
 	con.Create(&user)
 
-	return c.RenderHTML("Register")
+	jsonBytes, err := json.Marshal(user)
+	if err != nil {
+		panic("json marshal error")
+	}
+	c.Session["user"] = string(jsonBytes)
+
+	return c.Redirect(App.Index)
 }
 
 func (c User) validate(email, password, name string) {
