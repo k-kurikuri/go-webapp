@@ -23,10 +23,7 @@ func (c User) Register() revel.Result {
 	c.validate(email, password, name)
 
 	if c.Validation.HasErrors() {
-		// TODO: validation logic
-		c.Validation.Keep()
-		c.FlashParams()
-		return c.Redirect(User.Create)
+		return c.flashWithRedirect("")
 	}
 
 	// email登録チェック
@@ -35,18 +32,12 @@ func (c User) Register() revel.Result {
 	con.Where("email = ?", email).FirstOrInit(&user)
 
 	if user.Email == email {
-		c.Flash.Error("This is a registered email address")
-		c.Validation.Keep()
-		c.FlashParams()
-		return c.Redirect(User.Create)
+		return c.flashWithRedirect("This is a registered email address")
 	}
 
 	hashPass, err := auth.Crypt(password)
 	if err != nil {
-		c.Flash.Error("Create Hash Password Failed")
-		c.Validation.Keep()
-		c.FlashParams()
-		return c.Redirect(User.Create)
+		return c.flashWithRedirect("Create Hash Password Failed")
 	}
 
 	user = models.User{Email: email, HashPass: hashPass, Name: name}
@@ -62,4 +53,11 @@ func (c User) validate(email, password, name string) {
 	c.Validation.MaxSize(password, 16).Message("Password must be 16 characters or less")
 
 	c.Validation.Required(name).Message("must be user name")
+}
+
+func (c User) flashWithRedirect(errMsg string) revel.Result {
+	c.Flash.Error(errMsg)
+	c.Validation.Keep()
+	c.FlashParams()
+	return c.Redirect(User.Create)
 }
