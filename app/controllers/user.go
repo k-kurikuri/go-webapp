@@ -44,11 +44,7 @@ func (c User) Register() revel.Result {
 	user = models.User{Email: email, HashPass: hashPass, Name: name}
 	con.Create(&user)
 
-	jsonBytes, err := json.Marshal(user)
-	if err != nil {
-		panic("json marshal error")
-	}
-	c.Session["user"] = string(jsonBytes)
+	c.authSession(user)
 
 	return c.Redirect(App.Index)
 }
@@ -67,4 +63,12 @@ func (c User) flashWithRedirect(errMsg string) revel.Result {
 	c.Validation.Keep()
 	c.FlashParams()
 	return c.Redirect(User.Create)
+}
+
+func (c User) authSession(user models.User) {
+	jsonBytes, err := json.Marshal(user)
+	if err != nil {
+		panic("json marshal error")
+	}
+	c.Session["user"] = string(jsonBytes)
 }
