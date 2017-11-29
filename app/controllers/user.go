@@ -6,6 +6,7 @@ import (
 	"github.com/k-kurikuri/gogo-done/app/db"
 	"github.com/k-kurikuri/gogo-done/app/models"
 	"github.com/revel/revel"
+	"log"
 )
 
 type User struct {
@@ -68,7 +69,7 @@ func (c User) flashWithRedirect(errMsg string) revel.Result {
 func (c User) authSession(user models.User) {
 	jsonBytes, err := json.Marshal(user)
 	if err != nil {
-		panic("json marshal error")
+		log.Panic("json marshal error")
 	}
 	c.Session["user"] = string(jsonBytes)
 }
