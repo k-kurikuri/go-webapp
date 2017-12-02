@@ -18,9 +18,9 @@ func (c User) Create() revel.Result {
 }
 
 func (c User) Register() revel.Result {
+	name := c.Params.Form.Get("name")
 	email := c.Params.Form.Get("email")
 	password := c.Params.Form.Get("password")
-	name := c.Params.Form.Get("name")
 
 	c.validate(email, password, name)
 
