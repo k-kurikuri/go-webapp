@@ -14,8 +14,7 @@ type Auth struct {
 }
 
 func (c Auth) Index() revel.Result {
-	greeting := "Aloha World"
-	return c.Render(greeting)
+	return c.Render()
 }
 
 func (c Auth) Authenticate() revel.Result {
