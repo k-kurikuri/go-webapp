@@ -29,7 +29,7 @@ func (c App) sessionUser() (*models.User, error) {
 
 	jsonBytes := ([]byte)(jsonStr)
 
-	user := new(models.User)
+	user := &models.User{}
 
 	err := json.Unmarshal(jsonBytes, user)
 
