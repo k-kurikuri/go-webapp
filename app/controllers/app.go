@@ -24,14 +24,14 @@ func (c App) Index() revel.Result {
 	return c.Render(user)
 }
 
-func (c App) sessionUser() (*models.User, error) {
+func (c App) sessionUser() (models.User, error) {
 	jsonStr := c.Session["user"]
 
 	jsonBytes := ([]byte)(jsonStr)
 
-	user := &models.User{}
+	user := models.User{}
 
-	err := json.Unmarshal(jsonBytes, user)
+	err := json.Unmarshal(jsonBytes, &user)
 
 	return user, err
 }
