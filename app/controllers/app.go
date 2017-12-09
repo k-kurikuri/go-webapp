@@ -16,12 +16,7 @@ func init() {
 }
 
 func (c App) Index() revel.Result {
-	user, err := c.sessionUser()
-	if err != nil {
-		panic("json parse error")
-	}
-
-	return c.Render(user)
+	return c.Render()
 }
 
 func (c App) sessionUser() (models.User, error) {

@@ -18,5 +18,5 @@ var AuthFilter = func(c *revel.Controller, fc []revel.Filter) {
 
 	json.Unmarshal([]byte(userStr), &user)
 
-	c.Render(user)
+	c.ViewArgs["user"] = user
 }
