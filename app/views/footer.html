@@ -39,6 +39,7 @@
     <script src="/public/js/sparklines.js"></script>
     <script src="/public/js/charts.js"></script>
     <script src="/public/js/jquery.slimscroll.min.js"></script>
+
     <script>
       //knob
       $(function() {
@@ -82,6 +83,20 @@
             el.html(el.html() + ' (GDP - ' + gdpData[code] + ')');
           }
         });
+      });
+
+      $('#create-btn').click(function() {
+        // TODO:
+        $.post('/app/create', { title: "映画を見た", category: "Movie" })
+          .done(function( data ) {
+            console.log(data);
+          });
+        return false;
+      });
+
+      $(function() {
+        $.datepicker.setDefaults($.datepicker.regional[ "ja" ]);
+        $("#datepicker").datepicker();
       });
     </script>
     {{if eq .RunMode "dev"}}

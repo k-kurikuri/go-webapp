@@ -20,8 +20,8 @@ func (c App) Index() revel.Result {
 func (c App) Create() revel.Result {
 	// TODO:
 	res := make(map[string]interface{})
-	res["title"] = "映画見た"
-	res["category"] = "Movie"
+	res["title"] = c.Params.Form.Get("title")
+	res["category"] = c.Params.Form.Get("category")
 
 	return c.RenderJSON(res)
 }
