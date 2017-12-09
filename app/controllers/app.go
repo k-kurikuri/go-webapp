@@ -19,6 +19,15 @@ func (c App) Index() revel.Result {
 	return c.Render()
 }
 
+func (c App) Create() revel.Result {
+	// TODO:
+	res := make(map[string]interface{})
+	res["title"] = "映画見た"
+	res["category"] = "Movie"
+
+	return c.RenderJSON(res)
+}
+
 func (c App) sessionUser() (models.User, error) {
 	jsonStr := c.Session["user"]
 
