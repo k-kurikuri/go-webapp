@@ -11,11 +11,11 @@ GET     /                                       Auth.Index
 POST    /auth                                   Auth.Authenticate
 
 # user register
-GET     /user/create                          User.Create
 POST    /user/register                        User.Register
 
 # application
-GET     /done-list                              App.Index
+GET     /app/index                              App.Index
+POST    /app/create                             App.Create
 
 # Ignore favicon requests
 GET     /favicon.ico                            404

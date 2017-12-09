@@ -13,10 +13,6 @@ type User struct {
 	*revel.Controller
 }
 
-func (c User) Create() revel.Result {
-	return c.Render()
-}
-
 func (c User) Register() revel.Result {
 	name := c.Params.Form.Get("name")
 	email := c.Params.Form.Get("email")
@@ -63,7 +59,7 @@ func (c User) flashWithRedirect(errMsg string) revel.Result {
 	c.Flash.Error(errMsg)
 	c.Validation.Keep()
 	c.FlashParams()
-	return c.Redirect(User.Create)
+	return c.Redirect(Auth.Index)
 }
 
 func (c User) authSession(user models.User) {
