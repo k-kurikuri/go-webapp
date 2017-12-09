@@ -1,9 +1,7 @@
 package controllers
 
 import (
-	"encoding/json"
 	"github.com/k-kurikuri/gogo-done/app/filters"
-	"github.com/k-kurikuri/gogo-done/app/models"
 	"github.com/revel/revel"
 )
 
@@ -26,16 +24,4 @@ func (c App) Create() revel.Result {
 	res["category"] = "Movie"
 
 	return c.RenderJSON(res)
-}
-
-func (c App) sessionUser() (models.User, error) {
-	jsonStr := c.Session["user"]
-
-	jsonBytes := ([]byte)(jsonStr)
-
-	user := models.User{}
-
-	err := json.Unmarshal(jsonBytes, &user)
-
-	return user, err
 }
