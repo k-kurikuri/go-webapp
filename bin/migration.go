@@ -12,7 +12,7 @@ func main() {
 	defer db.Close()
 
 	db.DropTableIfExists(
-		&models.DoneListCategory{},
+		&models.DoneListHistory{},
 		&models.DoneList{},
 		&models.Category{},
 		&models.User{},
@@ -22,11 +22,11 @@ func main() {
 	db.Set("gorm:table_options", "ENGINE=InnoDB").AutoMigrate(
 		&models.DoneList{},
 		&models.Category{},
-		&models.DoneListCategory{},
+		&models.DoneListHistory{},
 		&models.User{},
 	)
 
 	// params : foreignkey field, destination table(id) ,ONDELETE ,ONUPDATE
-	db.Model(&models.DoneListCategory{}).AddForeignKey("category_id", "categories(id)", "RESTRICT", "RESTRICT")
-	db.Model(&models.DoneListCategory{}).AddForeignKey("done_list_id", "done_lists(id)", "RESTRICT", "RESTRICT")
+	db.Model(&models.DoneList{}).AddForeignKey("category_id", "categories(id)", "RESTRICT", "RESTRICT")
+	db.Model(&models.DoneListHistory{}).AddForeignKey("done_list_id", "done_lists(id)", "RESTRICT", "RESTRICT")
 }
