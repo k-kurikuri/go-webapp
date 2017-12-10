@@ -87,7 +87,7 @@
 
       $('#create-btn').click(function() {
         // TODO:
-        $.post('/app/create', { title: "映画を見た", category: "Movie" })
+        $.post('/app/create', { title: "映画を見た", category: "1", postedAt: $("#datepicker").val() })
           .done(function( data ) {
             console.log(data);
           });
@@ -95,8 +95,9 @@
       });
 
       $(function() {
-        $.datepicker.setDefaults($.datepicker.regional[ "ja" ]);
-        $("#datepicker").datepicker();
+        $("#datepicker").datepicker({
+          dateFormat: 'yy-mm-dd'
+        });
       });
     </script>
     {{if eq .RunMode "dev"}}
