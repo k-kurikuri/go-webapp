@@ -1,6 +1,7 @@
 package controllers
 
 import (
+	"encoding/json"
 	"github.com/k-kurikuri/gogo-done/app/db"
 	"github.com/k-kurikuri/gogo-done/app/filters"
 	"github.com/k-kurikuri/gogo-done/app/models"
@@ -46,10 +47,12 @@ func (c App) createDoneList(title string, categoryId uint, postedAt string) erro
 	con := db.Connection()
 	tran := con.Begin()
 
+	user, _ := c.sessionUser()
+
 	doneList := models.DoneList{
 		Title:      title,
 		CategoryId: categoryId,
-		//UserId: TODO
+		UserId:     user.Id,
 	}
 
 	if err := tran.Create(&doneList).Error; err != nil {
@@ -72,4 +75,17 @@ func (c App) createDoneList(title string, categoryId uint, postedAt string) erro
 	tran.Commit()
 
 	return nil
+}
+
+// TODO: controller依存せず使用したい
+func (c App) sessionUser() (models.User, error) {
+	jsonStr := c.Session["user"]
+
+	jsonBytes := ([]byte)(jsonStr)
+
+	user := models.User{}
+
+	err := json.Unmarshal(jsonBytes, &user)
+
+	return user, err
 }
