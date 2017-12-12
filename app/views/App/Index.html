@@ -125,11 +125,9 @@
                                             <label class="control-label col-lg-2">Category</label>
                                             <div class="col-lg-10">
                                                 <select class="form-control">
-                                                  <option value="">- Choose Category -</option>value="">
-                                                  <option value="1">General</option>
-                                                  <option value="2">News</option>
-                                                  <option value="3">Media</option>
-                                                  <option value="4">Funny</option>
+                                                {{range $index, $value := .categories}}
+                                                    <option value="{{$index}}">{{$value.Name}}</option>
+                                                {{end}}
                                                 </select>
                                             </div>
                                         </div>

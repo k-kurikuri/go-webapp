@@ -20,7 +20,13 @@ func init() {
 }
 
 func (c App) Index() revel.Result {
-	return c.Render()
+	con := db.Connection()
+
+	categories := []models.Category{}
+
+	con.Find(&categories)
+
+	return c.Render(categories)
 }
 
 func (c App) Create() revel.Result {
