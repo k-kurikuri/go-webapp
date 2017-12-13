@@ -1,184 +1,188 @@
 {{set . "title" "GogoDone"}}
 {{template "header.html" .}}
 
-    <!--main content start-->
-    <section id="main-content">
-        <section class="wrapper">
-            <!-- project team & activity start -->
+<!--main content start-->
+<section id="main-content">
+  <section class="wrapper">
+    <!-- project team & activity start -->
+    <div class="row">
+      <div class="col-lg-8">
+        <!--Project Activity start-->
+        <section class="panel">
+          <div class="panel-body progress-panel">
             <div class="row">
-                <div class="col-lg-8">
-                    <!--Project Activity start-->
-                    <section class="panel">
-                        <div class="panel-body progress-panel">
-                            <div class="row">
-                                <div class="col-lg-8 task-progress pull-left">
-                                    <h1>To Do Everyday</h1>
-                                </div>
-                                <div class="col-lg-4">
-                                  <span class="profile-ava pull-right">{{ .user.Name }}</span>
-                                </div>
-                            </div>
-                        </div>
-                        <table class="table table-hover personal-task">
-                            <tbody>
-                            <tr>
-                                <td>Today</td>
-                                <td>
-                                    web design
-                                </td>
-                                <td>
-                                    <span class="badge bg-important">Upload</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Yesterday</td>
-                                <td>
-                                    Project Design Task
-                                </td>
-                                <td>
-                                    <span class="badge bg-success">Task</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>21-10-14</td>
-                                <td>
-                                    Generate Invoice
-                                </td>
-                                <td>
-                                    <span class="badge bg-success">Task</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>22-10-14</td>
-                                <td>
-                                    Project Testing
-                                </td>
-                                <td>
-                                    <span class="badge bg-primary">To-Do</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>24-10-14</td>
-                                <td>
-                                    Project Release Date
-                                </td>
-                                <td>
-                                    <span class="badge bg-info">Milestone</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>28-10-14</td>
-                                <td>
-                                    Project Release Date
-                                </td>
-                                <td>
-                                    <span class="badge bg-primary">To-Do</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Last week</td>
-                                <td>
-                                    Project Release Date
-                                </td>
-                                <td>
-                                    <span class="badge bg-primary">To-Do</span>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>last month</td>
-                                <td>
-                                    Project Release Date
-                                </td>
-                                <td>
-                                    <span class="badge bg-success">To-Do</span>
-                                </td>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </section>
-                    <!--Project Activity end-->
-                </div>
-            </div><br><br>
-
-            <div class="row">
-                <div class="col-md-6 portlets">
-                    <div class="panel panel-default">
-                        <div class="panel-heading">
-                            <div class="pull-left">Quick Post</div>
-                            <div class="clearfix"></div>
-                        </div>
-                        <div class="panel-body">
-                            <div class="padd">
-
-                                <div class="form quick-post">
-                                    <!-- Edit profile form (not working)-->
-                                    <form class="form-horizontal" action="/app/create" method="post">
-                                        <!-- Title -->
-                                        <div class="form-group">
-                                            <label class="control-label col-lg-2" for="title">Title</label>
-                                            <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="title" name="title">
-                                            </div>
-                                        </div>
-                                        <!-- Cateogry -->
-                                        <div class="form-group">
-                                            <label class="control-label col-lg-2">Category</label>
-                                            <div class="col-lg-10">
-                                                <select class="form-control" name="category">
-                                                {{range $index, $value := .categories}}
-                                                    <option value="{{$index}}">{{$value.Name}}</option>
-                                                {{end}}
-                                                </select>
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group">
-                                          <label class="control-label col-lg-2">Post Date</label>
-                                          <div class="col-lg-10">
-                                            <input type="text" id="datepicker" name="postedAt"/>
-                                          </div>
-                                        </div>
-
-                                        <!-- Buttons -->
-                                        <div class="form-group">
-                                            <!-- Buttons -->
-                                            <div class="col-lg-offset-2 col-lg-9">
-                                                <button type="submit" id="create-btn" class="btn btn-primary">Publish</button>
-                                                <button type="submit" class="btn btn-danger">Save Draft</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </div>
-
-
-                            </div>
-                            <div class="widget-foot">
-                                <!-- Footer goes here -->
-                            </div>
-                        </div>
-                    </div>
-
-                </div>
-
+              <div class="col-lg-8 task-progress pull-left">
+                <h1>To Do Everyday</h1>
+              </div>
+              <div class="col-lg-4">
+                <span class="profile-ava pull-right">{{ .user.Name }}</span>
+              </div>
             </div>
-            <!-- project team & activity end -->
-
-
+          </div>
+          <table class="table table-hover personal-task">
+            <tbody>
+            <tr>
+              <td>Today</td>
+              <td>
+                web design
+              </td>
+              <td>
+                <span class="badge bg-important">Upload</span>
+              </td>
+            </tr>
+            <tr>
+              <td>Yesterday</td>
+              <td>
+                Project Design Task
+              </td>
+              <td>
+                <span class="badge bg-success">Task</span>
+              </td>
+            </tr>
+            <tr>
+              <td>21-10-14</td>
+              <td>
+                Generate Invoice
+              </td>
+              <td>
+                <span class="badge bg-success">Task</span>
+              </td>
+            </tr>
+            <tr>
+              <td>22-10-14</td>
+              <td>
+                Project Testing
+              </td>
+              <td>
+                <span class="badge bg-primary">To-Do</span>
+              </td>
+            </tr>
+            <tr>
+              <td>24-10-14</td>
+              <td>
+                Project Release Date
+              </td>
+              <td>
+                <span class="badge bg-info">Milestone</span>
+              </td>
+            </tr>
+            <tr>
+              <td>28-10-14</td>
+              <td>
+                Project Release Date
+              </td>
+              <td>
+                <span class="badge bg-primary">To-Do</span>
+              </td>
+            </tr>
+            <tr>
+              <td>Last week</td>
+              <td>
+                Project Release Date
+              </td>
+              <td>
+                <span class="badge bg-primary">To-Do</span>
+              </td>
+            </tr>
+            <tr>
+              <td>last month</td>
+              <td>
+                Project Release Date
+              </td>
+              <td>
+                <span class="badge bg-success">To-Do</span>
+              </td>
+            </tr>
+            </tbody>
+          </table>
         </section>
-        <div class="text-right">
-            <!-- TODO: include license html -->
-            <div class="credits">
-                <!--
-                  All the links in the footer should remain intact.
-                  You can delete the links only if you purchased the pro version.
-                  Licensing information: https://bootstrapmade.com/license/
-                  Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
-                -->
-                <a href="https://bootstrapmade.com/">Free Bootstrap Templates</a> by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        <!--Project Activity end-->
+      </div>
+    </div>
+    <br><br>
+
+    <div class="row">
+      <div class="col-md-6 portlets">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <div class="pull-left">Quick Post</div>
+            <div class="clearfix"></div>
+          </div>
+          <div class="panel-body">
+            <div class="padd">
+
+              <div class="form quick-post">
+                <!-- Edit profile form (not working)-->
+                <form class="form-horizontal" action="/app/create" method="post">
+                  <!-- Title -->
+                  <div class="form-group">
+                    <label class="control-label col-lg-2" for="title">Title</label>
+
+                    <div class="col-lg-10">
+                      <input type="text" class="form-control" id="title" name="title">
+                    </div>
+                  </div>
+                  <!-- Cateogry -->
+                  <div class="form-group">
+                    <label class="control-label col-lg-2">Category</label>
+
+                    <div class="col-lg-10">
+                      <select class="form-control" name="category">
+                        {{range $index, $value := .categories}}
+                        <option value="{{$index}}">{{$value.Name}}</option>
+                        {{end}}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div class="form-group">
+                    <label class="control-label col-lg-2">Post Date</label>
+
+                    <div class="col-lg-10">
+                      <input type="text" id="datepicker" name="postedAt"/>
+                    </div>
+                  </div>
+
+                  <!-- Buttons -->
+                  <div class="form-group">
+                    <!-- Buttons -->
+                    <div class="col-lg-offset-2 col-lg-9">
+                      <button type="submit" id="create-btn" class="btn btn-primary">Publish</button>
+                      <button type="submit" class="btn btn-danger">Save Draft</button>
+                    </div>
+                  </div>
+                </form>
+              </div>
+
+
             </div>
+            <div class="widget-foot">
+              <!-- Footer goes here -->
+            </div>
+          </div>
         </div>
-    </section>
-    <!--main content end-->
+
+      </div>
+
+    </div>
+    <!-- project team & activity end -->
+
+
+  </section>
+  <div class="text-right">
+    <!-- TODO: include license html -->
+    <div class="credits">
+      <!--
+        All the links in the footer should remain intact.
+        You can delete the links only if you purchased the pro version.
+        Licensing information: https://bootstrapmade.com/license/
+        Purchase the pro version form: https://bootstrapmade.com/buy/?theme=NiceAdmin
+      -->
+      <a href="https://bootstrapmade.com/">Free Bootstrap Templates</a> by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+    </div>
+  </div>
+</section>
+<!--main content end-->
 </section>
 <!-- container section start -->
 
