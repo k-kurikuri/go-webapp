@@ -50,6 +50,10 @@ func (c App) Create() revel.Result {
 	return c.Redirect(App.Index)
 }
 
+func (c App) Detail() revel.Result {
+	return c.Render()
+}
+
 // 最後にやった事を登録する
 func (c App) createDoneList(title string, categoryId uint, postedAt string) error {
 	con := db.Connection()

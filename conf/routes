@@ -15,6 +15,7 @@ POST    /user/register                        User.Register
 
 # application
 GET     /app/index                              App.Index
+GET     /app/detail                             App.Detail
 POST    /app/create                             App.Create
 
 # Ignore favicon requests
