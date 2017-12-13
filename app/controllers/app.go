@@ -26,7 +26,10 @@ func (c App) Index() revel.Result {
 
 	con.Find(&categories)
 
-	return c.Render(categories)
+	doneLists := []models.DoneList{}
+	con.Find(&doneLists)
+
+	return c.Render(categories, doneLists)
 }
 
 func (c App) Create() revel.Result {
@@ -69,6 +72,7 @@ func (c App) createDoneList(title string, categoryId uint, postedAt string) erro
 	log.Println(t)
 	doneListHistory := models.DoneListHistory{
 		DoneListId: doneList.Id,
+		Note:       "イベント作成済み",
 		PostedAt:   t,
 	}
 
