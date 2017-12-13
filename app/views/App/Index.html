@@ -112,19 +112,19 @@
 
                                 <div class="form quick-post">
                                     <!-- Edit profile form (not working)-->
-                                    <form class="form-horizontal">
+                                    <form class="form-horizontal" action="/app/create" method="post">
                                         <!-- Title -->
                                         <div class="form-group">
                                             <label class="control-label col-lg-2" for="title">Title</label>
                                             <div class="col-lg-10">
-                                                <input type="text" class="form-control" id="title">
+                                                <input type="text" class="form-control" id="title" name="title">
                                             </div>
                                         </div>
                                         <!-- Cateogry -->
                                         <div class="form-group">
                                             <label class="control-label col-lg-2">Category</label>
                                             <div class="col-lg-10">
-                                                <select class="form-control">
+                                                <select class="form-control" name="category">
                                                 {{range $index, $value := .categories}}
                                                     <option value="{{$index}}">{{$value.Name}}</option>
                                                 {{end}}
@@ -135,7 +135,7 @@
                                         <div class="form-group">
                                           <label class="control-label col-lg-2">Post Date</label>
                                           <div class="col-lg-10">
-                                            <input type="text" id="datepicker" />
+                                            <input type="text" id="datepicker" name="postedAt"/>
                                           </div>
                                         </div>
 
@@ -162,6 +162,7 @@
 
             </div>
             <!-- project team & activity end -->
+
 
         </section>
         <div class="text-right">

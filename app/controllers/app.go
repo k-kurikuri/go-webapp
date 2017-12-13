@@ -37,15 +37,14 @@ func (c App) Create() revel.Result {
 	// TODO: validate
 
 	categoryId, _ := strconv.Atoi(categoryIdStr)
+	// 配列indexをincrement
+	categoryId++
 
 	if err := c.createDoneList(title, uint(categoryId), postedAt); err != nil {
 		log.Panic("create donelist failed")
 	}
 
-	res := make(map[string]interface{})
-	res["isResult"] = true
-
-	return c.RenderJSON(res)
+	return c.Redirect(App.Index)
 }
 
 // 最後にやった事を登録する
