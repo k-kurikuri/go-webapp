@@ -91,6 +91,12 @@
       dateFormat: 'yy-mm-dd',
     }).datepicker('setDate', new Date());
   });
+
+  $(function () {
+    $('.done-list-row').click(function(event) {
+      window.location = '/app/detail/' + event.currentTarget.childNodes.item(1).textContent;
+    });
+  });
 </script>
 {{if eq .RunMode "dev"}}
 {{/*template "debug.html" .*/}}
