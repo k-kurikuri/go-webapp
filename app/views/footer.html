@@ -85,19 +85,10 @@
         });
       });
 
-      $('#create-btn').click(function() {
-        // TODO:
-        $.post('/app/create', { title: "映画を見た", category: "1", postedAt: $("#datepicker").val() })
-          .done(function( data ) {
-            console.log(data);
-          });
-        return false;
-      });
-
       $(function() {
         $("#datepicker").datepicker({
-          dateFormat: 'yy-mm-dd'
-        });
+          dateFormat: 'yy-mm-dd',
+        }).datepicker('setDate', new Date());
       });
     </script>
     {{if eq .RunMode "dev"}}
