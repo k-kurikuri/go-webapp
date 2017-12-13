@@ -51,7 +51,15 @@ func (c App) Create() revel.Result {
 }
 
 func (c App) Detail() revel.Result {
-	return c.Render()
+	doneListId := c.Params.Route.Get("id")
+
+	con := db.Connection()
+
+	doneListHistories := []models.DoneListHistory{}
+
+	con.Where("done_list_id = ?", doneListId).Find(&doneListHistories)
+
+	return c.Render(doneListHistories)
 }
 
 // 最後にやった事を登録する
