@@ -1,9 +1,12 @@
 package db
 
 import (
+	"os"
+
+	"strconv"
+
 	"github.com/jinzhu/gorm"
 	"github.com/joho/godotenv"
-	"os"
 )
 
 func init() {
@@ -23,6 +26,10 @@ func Connection() *gorm.DB {
 	if err != nil {
 		panic("Don't database open")
 	}
+
+	db.Exec("SET sql_mode=(SELECT REPLACE(@@sql_mode, 'ONLY_FULL_GROUP_BY', ''))")
+	logMode, _ := strconv.ParseBool(os.Getenv("DB_LOG_MODE"))
+	db.LogMode(logMode)
 
 	return db
 }
