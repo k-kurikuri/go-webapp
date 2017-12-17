@@ -2,13 +2,14 @@ package controllers
 
 import (
 	"encoding/json"
+	"log"
+	"strconv"
+	"time"
+
 	"github.com/k-kurikuri/gogo-done/app/db"
 	"github.com/k-kurikuri/gogo-done/app/filters"
 	"github.com/k-kurikuri/gogo-done/app/models"
 	"github.com/revel/revel"
-	"log"
-	"strconv"
-	"time"
 )
 
 type App struct {
@@ -21,13 +22,33 @@ func init() {
 
 func (c App) Index() revel.Result {
 	con := db.Connection()
+	defer con.Close()
 
 	categories := []models.Category{}
-
 	con.Find(&categories)
 
 	doneLists := []models.DoneList{}
 	con.Find(&doneLists)
+
+	ids := []uint{}
+	for _, doneList := range doneLists {
+		ids = append(ids, doneList.Id)
+	}
+
+	rows, _ := con.Table("done_list_histories").
+		Select("done_list_id, MAX(posted_at)").
+		Where("done_list_id IN (?)", ids).
+		Group("done_list_id").
+		Rows()
+
+	defer rows.Close()
+
+	for rows.Next() {
+		var doneListId uint
+		var latestPost time.Time
+		rows.Scan(&doneListId, &latestPost)
+		// todo: viewModelを生成する
+	}
 
 	return c.Render(categories, doneLists)
 }
@@ -54,6 +75,7 @@ func (c App) Detail() revel.Result {
 	doneListId := c.Params.Route.Get("id")
 
 	con := db.Connection()
+	defer con.Close()
 
 	doneListHistories := []models.DoneListHistory{}
 
@@ -65,6 +87,8 @@ func (c App) Detail() revel.Result {
 // 最後にやった事を登録する
 func (c App) createDoneList(title string, categoryId uint, postedAt string) error {
 	con := db.Connection()
+	defer con.Close()
+
 	tran := con.Begin()
 
 	user, _ := c.sessionUser()
