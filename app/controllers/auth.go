@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"encoding/json"
+
 	"github.com/k-kurikuri/gogo-done/app/db"
 	"github.com/k-kurikuri/gogo-done/app/models"
 	"github.com/k-kurikuri/gogo-done/app/routes"
