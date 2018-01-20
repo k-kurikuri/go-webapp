@@ -77,11 +77,13 @@ func (c App) Detail() revel.Result {
 	con := db.Connection()
 	defer con.Close()
 
-	doneListHistories := []models.DoneListHistory{}
+	doneList := models.DoneList{}
+	con.First(&doneList, doneListId)
 
+	doneListHistories := []models.DoneListHistory{}
 	con.Where("done_list_id = ?", doneListId).Find(&doneListHistories)
 
-	return c.Render(doneListHistories)
+	return c.Render(doneList, doneListHistories)
 }
 
 // 最後にやった事を登録する
