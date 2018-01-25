@@ -3,11 +3,33 @@
 
 <section id="main-content">
   <section class="wrapper">
-  {{range .doneListHistories}}
-    <div>
-      {{.Note}}
+    <div class="row">
+      <div class="col-lg-8">
+        <!--Project Activity start-->
+        <section class="panel">
+          <div class="panel-body progress-panel">
+            <div class="row">
+              <div class="col-lg-8 task-progress pull-left">
+                <h1>{{.doneList.Title}} : {{.doneList.CreatedAt}}</h1>
+              </div>
+            </div>
+          </div>
+
+          <!-- DoneList Contents -->
+          <table class="table table-hover personal-task">
+            <tbody>
+            {{range .doneListHistories}}
+            <tr>
+              <td>{{.Note}}</td>
+              <td>{{.PostedAt}}</td>
+            </tr>
+            {{end}}
+            </tbody>
+          </table>
+        </section>
+        <!--Project Activity end-->
+      </div>
     </div>
-  {{end}}
   </section>
 </section>
 
