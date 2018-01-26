@@ -41,6 +41,7 @@
 <script src="/public/js/charts.js"></script>
 <script src="/public/js/jquery.slimscroll.min.js"></script>
 
+<script src="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/js/bootstrap-editable.min.js"></script>
 <script>
   //knob
   $(function () {
@@ -97,7 +98,25 @@
       window.location = '/app/detail/' + event.currentTarget.childNodes.item(1).textContent;
     });
   });
+
+  // TODO: edit sample
+  $.fn.editable.defaults.mode = 'inline';
+  $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
+  $(document).ready(function() {
+    $('#username').editable();
+  });
+
+  // Editイベント
+  // TODO: 動的にパラメータ変更する
+  $('#username').editable({
+    type: 'text',
+    pk: 1,
+    url: '/app/update',
+    title: 'Enter username'
+  });
 </script>
+
+
 {{if eq .RunMode "dev"}}
 {{/*template "debug.html" .*/}}
 {{end}}
