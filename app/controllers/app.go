@@ -86,6 +86,10 @@ func (c App) Detail() revel.Result {
 	return c.Render(doneList, doneListHistories)
 }
 
+func (c App) Update() revel.Result {
+	return c.RenderJSON("success")
+}
+
 // 最後にやった事を登録する
 func (c App) createDoneList(title string, categoryId uint, postedAt string) error {
 	con := db.Connection()

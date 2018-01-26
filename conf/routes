@@ -17,6 +17,7 @@ POST    /user/register                        User.Register
 GET     /app/index                              App.Index
 GET     /app/detail/:id                         App.Detail
 POST    /app/create                             App.Create
+PUT     /app/update                             App.Update
 
 # Ignore favicon requests
 GET     /favicon.ico                            404
