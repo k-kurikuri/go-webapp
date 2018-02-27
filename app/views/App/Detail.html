@@ -20,7 +20,7 @@
             <tbody>
             {{range .doneListHistories}}
             <tr>
-              <td>{{.Note}}</td>
+              <td><a href="#" class="task-notes" id="note-id{{.Id}}" data-type="text" data-pk="{{.Id}}" data-url="/app/update" data-title="Edit Note...">{{.Note}}</a></td>
               <td>{{.PostedAt}}</td>
             </tr>
             {{end}}

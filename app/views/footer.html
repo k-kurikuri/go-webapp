@@ -99,20 +99,14 @@
     });
   });
 
-  // TODO: edit sample
   $.fn.editable.defaults.mode = 'inline';
   $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
   $(document).ready(function() {
-    $('#username').editable();
-  });
-
-  // Editイベント
-  // TODO: 動的にパラメータ変更する
-  $('#username').editable({
-    type: 'text',
-    pk: 1,
-    url: '/app/update',
-    title: 'Enter username'
+    $('.task-notes').each(function () {
+      const attrId = $(this).attr('id');
+      // Editイベント
+      $('#' + attrId).editable();
+    });
   });
 </script>
 
