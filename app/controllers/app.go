@@ -87,6 +87,16 @@ func (c App) Detail() revel.Result {
 }
 
 func (c App) Update() revel.Result {
+	// TODO: auth user's record validate
+	historyId := c.Params.Form.Get("pk")
+	note := c.Params.Form.Get("value")
+
+	con := db.Connection()
+	defer con.Close()
+
+	doneHistory := models.DoneListHistory{}
+	con.Model(&doneHistory).Where("id = ?", historyId).Update("note", note)
+
 	return c.RenderJSON("success")
 }
 
