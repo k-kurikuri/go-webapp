@@ -103,8 +103,8 @@
   $.fn.editable.defaults.ajaxOptions = {type: "PUT"};
   $(document).ready(function() {
     $('.task-notes').each(function () {
+      // edit event listener...
       const attrId = $(this).attr('id');
-      // Editイベント
       $('#' + attrId).editable();
     });
   });
