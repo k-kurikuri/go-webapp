@@ -87,7 +87,6 @@ func (c App) Detail() revel.Result {
 }
 
 func (c App) Update() revel.Result {
-	// TODO: auth user's record validate
 	historyId := c.Params.Form.Get("pk")
 	note := c.Params.Form.Get("value")
 
@@ -95,7 +94,21 @@ func (c App) Update() revel.Result {
 	defer con.Close()
 
 	doneHistory := models.DoneListHistory{}
-	con.Model(&doneHistory).Where("id = ?", historyId).Update("note", note)
+	con.First(&doneHistory, historyId)
+
+	doneList := models.DoneList{}
+	con.First(&doneList, doneHistory.DoneListId)
+
+	user, _ := c.sessionUser()
+	if user.Id != doneList.UserId {
+		log.Panic("this is not auth user record")
+	}
+
+	tran := con.Begin()
+
+	con.Model(&doneHistory).Update("note", note)
+
+	tran.Commit()
 
 	return c.RenderJSON("success")
 }
