@@ -21,6 +21,8 @@ func init() {
 }
 
 func (c App) Index() revel.Result {
+	user, _ := c.sessionUser()
+
 	con := db.Connection()
 	defer con.Close()
 
@@ -28,7 +30,7 @@ func (c App) Index() revel.Result {
 	con.Find(&categories)
 
 	doneLists := []models.DoneList{}
-	con.Find(&doneLists)
+	con.Where("user_id = ?", user.Id).Find(&doneLists)
 
 	ids := []uint{}
 	for _, doneList := range doneLists {
