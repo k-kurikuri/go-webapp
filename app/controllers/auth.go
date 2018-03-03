@@ -42,7 +42,6 @@ func (c Auth) Authenticate() revel.Result {
 	}
 
 	c.Session["user"] = string(jsonBytes)
-	c.Flash.Success("Welcome " + user.Name)
 
 	return c.Redirect(routes.App.Index())
 }
